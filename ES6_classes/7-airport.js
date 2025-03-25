@@ -1,7 +1,7 @@
 export default class Airport {
   constructor(name, code) {
-    this._name = name;
-    this._code = code;
+    this.name = name;
+    this.code = code;
   }
 
   static checkString(str, attribute) {
@@ -12,10 +12,6 @@ export default class Airport {
   }
 
   set name(newName) {
-    this.setName(newName);
-  }
-
-  setName(newName) {
     this._name = Airport.checkString(newName, 'Name');
   }
 
@@ -24,10 +20,6 @@ export default class Airport {
   }
 
   set code(newCode) {
-    this.setCode(newCode);
-  }
-
-  setCode(newCode) {
     this._code = Airport.checkString(newCode, 'Code');
   }
 

@@ -2,8 +2,8 @@ import Currency from './3-currency';
 
 export default class Pricing {
   constructor(amount, currency) {
-    this.setAmount(amount);
-    this.setCurrency(currency);
+    this.amount = amount;
+    this.currency = currency;
   }
 
   static checkNumber(num) {
@@ -21,10 +21,6 @@ export default class Pricing {
   }
 
   set amount(newAmount) {
-    this.setAmount(newAmount);
-  }
-
-  setAmount(newAmount) {
     this._amount = Pricing.checkNumber(newAmount);
   }
 
@@ -33,10 +29,6 @@ export default class Pricing {
   }
 
   set currency(newCurrency) {
-    this.setCurrency(newCurrency);
-  }
-
-  setCurrency(newCurrency) {
     this._currency = Pricing.checkClass(newCurrency, Currency);
   }
 

@@ -3,7 +3,7 @@ import Building from './5-building';
 export default class SkyHighBuilding extends Building {
   constructor(sqft, floors) {
     super(sqft);
-    this.setFloors(floors);
+    this.floors = floors;
   }
 
   static checkNumber(num) {
@@ -14,10 +14,6 @@ export default class SkyHighBuilding extends Building {
   }
 
   set floors(newFloors) {
-    this.setFloors(newFloors);
-  }
-
-  setFloors(newFloors) {
     this._floors = SkyHighBuilding.checkNumber(newFloors);
   }
 

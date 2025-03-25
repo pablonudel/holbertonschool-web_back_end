@@ -3,7 +3,7 @@ export default class Building {
     if (this.constructor !== Building && !this.evacuationWarningMessage) {
       throw new Error('Class extending Building must override evacuationWarningMessage');
     }
-    this._sqft = sqft;
+    this.sqft = sqft;
   }
 
   static checkNumber(num) {
@@ -14,10 +14,6 @@ export default class Building {
   }
 
   set sqft(newSqft) {
-    this.setSqft(newSqft);
-  }
-
-  setSqft(newSqft) {
     this._sqft = Building.checkNumber(newSqft);
   }
 
