@@ -1,7 +1,7 @@
 export default class Currency {
   constructor(code, name) {
-    this.setCode(code);
-    this.setName(name);
+    this.code = code;
+    this.name = name;
   }
 
   static checkString(str, propertyName) {
@@ -12,10 +12,6 @@ export default class Currency {
   }
 
   set code(newCode) {
-    this.setCode(newCode);
-  }
-
-  setCode(newCode) {
     this._code = Currency.checkString(newCode, 'Code');
   }
 
@@ -24,10 +20,6 @@ export default class Currency {
   }
 
   set name(newName) {
-    this.checkString(newName);
-  }
-
-  setName(newName) {
     this._name = Currency.checkString(newName, 'Name');
   }
 

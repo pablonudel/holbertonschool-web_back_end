@@ -1,8 +1,8 @@
 export default class HolbertonCourse {
   constructor(name, length, students) {
-    this.setName(name);
-    this.setLength(length);
-    this.setStudents(students);
+    this.name = name;
+    this.length = length;
+    this.students = students;
   }
 
   static checkString(str) {
@@ -27,38 +27,26 @@ export default class HolbertonCourse {
   }
 
   set name(newName) {
-    this.setName(newName);
+    this._name = HolbertonCourse.checkString(newName);
   }
 
   get name() {
     return this._name;
   }
 
-  setName(newName) {
-    this._name = HolbertonCourse.checkString(newName);
-  }
-
   set length(newLength) {
-    this.setLength(newLength);
+    this._length = HolbertonCourse.checkNumber(newLength);
   }
 
   get length() {
     return this._length;
   }
 
-  setLength(newLength) {
-    this._length = HolbertonCourse.checkNumber(newLength);
-  }
-
   set students(newStudents) {
-    this.setStudents(newStudents);
+    this._students = HolbertonCourse.checkStringArray(newStudents);
   }
 
   get students() {
     return this._students;
-  }
-
-  setStudents(newStudents) {
-    this._students = HolbertonCourse.checkStringArray(newStudents);
   }
 }
