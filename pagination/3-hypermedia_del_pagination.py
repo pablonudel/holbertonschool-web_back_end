@@ -40,10 +40,11 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        assert index in range(0, len(self.indexed_dataset()))
         next_index = index
         data = []
         indexed_dataset = self.indexed_dataset()
+
+        assert index is not None and index in range(0, len(indexed_dataset))
 
         while len(data) < page_size and next_index < len(indexed_dataset):
             if next_index in indexed_dataset:
