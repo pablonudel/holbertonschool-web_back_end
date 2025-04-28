@@ -44,7 +44,7 @@ class Server:
         data = []
         indexed_dataset = self.indexed_dataset()
 
-        assert index is not None and index in range(0, len(indexed_dataset))
+        assert index is not None and 0 <= index < len(indexed_dataset)
 
         while len(data) < page_size and next_index < len(indexed_dataset):
             if next_index in indexed_dataset:
