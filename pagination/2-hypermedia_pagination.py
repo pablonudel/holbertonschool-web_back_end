@@ -44,7 +44,7 @@ class Server:
             else self.dataset()[start_index:end_index]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
-        """Return a list of data for the page"""
+        """Return a dict of data for the page"""
         data = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.dataset()) / page_size)
 
