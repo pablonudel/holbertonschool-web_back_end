@@ -1,13 +1,12 @@
-const process = require('process');
+const std = require('process');
 
-process.stdout.write('Welcome to Holberton School, what is your name?\n');
-process.stdin.setEncoding('utf-8');
-process.stdin.on('data', (data) => {
-  const name = data.trim();
-  process.stdout.write(`Your name is: ${name}\n`);
-  process.stdin.end();
+std.stdout.write('Welcome to Holberton School, what is your name?\n');
+std.stdin.on('readable', () => {
+  const name = std.stdin.read();
+  if (name) {
+    std.stdout.write(`Your name is: ${name}`);
+  }
 });
-
-process.stdin.on('end', () => {
-  process.stdout.write('This important software is now closing\n');
+std.stdin.on('end', () => {
+  console.log('This important software is now closing');
 });
