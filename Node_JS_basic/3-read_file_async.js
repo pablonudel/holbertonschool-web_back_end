@@ -1,4 +1,4 @@
-const fs = require('node:fs').promises;
+const fs = require('fs').promises;
 
 async function countStudents(path) {
   try {
@@ -18,10 +18,7 @@ async function countStudents(path) {
       fields[field].push(firstname);
     });
 
-    const totalStudents = Object.values(fields).reduce((acc, curr) => acc + curr.length, 0);
-    console.log(`Number of students: ${totalStudents}`);
-    dataString = `Number of students: ${totalStudents}`;
-
+    dataString = `Number of students: ${rows.length}`;
     for (const [field, students] of Object.entries(fields)) {
       dataString += `\nNumber of students in ${field}: ${students.length}. List: ${students.join(', ')}`;
     }
