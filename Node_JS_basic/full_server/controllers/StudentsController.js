@@ -6,9 +6,13 @@ class StudentsController {
       const data = await readDatabase(request.app.get('database'));
       let output = 'This is the list of our students';
 
-      for (const field in data) {
-        const students = data[field];
-        output += `\nNumber of students in ${field}: ${students.length}. List: ${students.join(', ')}`;
+      if (Object.keys(data).length === 0) {
+        output += '\nNo students in database';
+      } else {
+        for (const field in data) {
+          const students = data[field];
+          output += `\nNumber of students in ${field}: ${students.length}. List: ${students.join(', ')}`;
+        }
       }
 
       response.status(200).send(output);
