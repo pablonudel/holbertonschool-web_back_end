@@ -4,7 +4,7 @@ class StudentsController {
   static async getAllStudents(request, response) {
     try {
       const data = await readDatabase(request.app.get('database'));
-      let output = 'This is the list of our students';
+      let output = 'This is the list of our students';    
 
       for (const field in data) {
         const students = data[field];
@@ -15,7 +15,7 @@ class StudentsController {
     } catch (error) {
       return response.status(500).send(error.message);
     }
-  };
+  }
 
   static async getAllStudentsByMajor(request, response) {
     const { major } = request.params;
@@ -35,7 +35,7 @@ class StudentsController {
     } catch (error) {
       return response.status(500).send(error.message);
     }
-  };
+  }
 }
 
 export default StudentsController;
