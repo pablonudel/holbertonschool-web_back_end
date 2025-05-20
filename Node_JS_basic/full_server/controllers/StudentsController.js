@@ -6,8 +6,13 @@ class StudentsController {
       const data = await readDatabase(request.app.get('database'));
       
       let output = 'This is the list of our students\n';
-      for (const [field, students] of Object.entries(data)) {
-        output += `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}\n`;
+      
+      if (Object.keys(data).length === 0) {
+        output += 'No students in database';
+      } else {
+        for (const [field, students] of Object.entries(data)) {
+          output += `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}\n`;
+        }
       }
       response.status(200).send(output.trim());
     } catch (error) {
@@ -24,7 +29,11 @@ class StudentsController {
 
     try {
       const data = await readDatabase(request.app.get('database'));
-      response.status(200).send(`List: ${data[major].join(', ')}`);
+      if (Object.keys(data).length === 0) {
+        response.status(200).send('No students in database');
+      } else {
+        response.status(200).send(`List: ${data[major].join(', ')}`);
+      }
     } catch (error) {
       response.status(500).send(error.message);
     }

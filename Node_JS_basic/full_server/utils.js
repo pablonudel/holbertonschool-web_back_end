@@ -17,7 +17,7 @@ export default async function readDatabase(path) {
       fields[field].push(firstname);
     }); 
 
-    return Promise.resolve(fields);
+    return fields;
   } catch (err) {
     throw new Error('Cannot load the database');
   }
