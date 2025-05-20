@@ -1,6 +1,6 @@
 import readDatabase from '../utils';
 
-class StudentsController {
+export default class StudentsController {
   static async getAllStudents(req, res) {
     try {
       const data = await readDatabase(req.app.get('database'));
