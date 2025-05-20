@@ -1,17 +1,15 @@
 import readDatabase from '../utils';
 
-const db = '../database.csv'
-
 class StudentsController {
   static async getAllStudents(request, response) {
     try {
-      const data = await readDatabase(db);
+      const data = await readDatabase(request.app.get('database'));
       
-      let output = 'This is the list of our students';
+      let output = 'This is the list of our students\n';
       for (const [field, students] of Object.entries(data)) {
-        output += `\nNumber of students in ${field}: ${students.length}. List: ${students.join(', ')}`;
+        output += `Number of students in ${field}: ${students.length}. List: ${students.join(', ')}\n`;
       }
-      response.status(200).send(output);
+      response.status(200).send(output.trim());
     } catch (error) {
       response.status(500).send(error.message);
     }
@@ -25,7 +23,7 @@ class StudentsController {
     }
 
     try {
-      const data = await readDatabase(db);
+      const data = await readDatabase(request.app.get('database'));
       response.status(200).send(`List: ${data[major].join(', ')}`);
     } catch (error) {
       response.status(500).send(error.message);
