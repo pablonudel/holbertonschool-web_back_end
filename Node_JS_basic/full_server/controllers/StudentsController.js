@@ -13,9 +13,9 @@ export default class StudentsController {
         output += `\nNumber of students in ${field}: ${students.length}. List: ${students.join(', ')}`;
       }
 
-      return res.status(200).send(output);
+      res.status(200).send(output);
     } catch (error) {
-      return res.status(500).send(error.message);
+      res.status(500).send(error.message);
     }
   }
 
