@@ -15,7 +15,7 @@ export default class StudentsController {
 
       res.status(200).send(output);
     } catch (error) {
-      res.status(500).send(error.message);
+      res.status(500).send('Cannot load the database');
     }
   }
 
@@ -35,7 +35,7 @@ export default class StudentsController {
 
       return res.status(200).send(`List: ${students.join(', ')}`);
     } catch (error) {
-      return res.status(500).send(error.message);
+      return res.status(500).send('Cannot load the database');
     }
   }
 }
