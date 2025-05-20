@@ -1,28 +1,32 @@
 import fs from 'fs/promises';
 
-export default async function readDatabase(path) {
+export default async function readDatabase(filePath) {
   try {
-    const data = await fs.readFile(path, 'utf8');
-    const rows = data.trim().split('\n').slice(1);
-    const fields = {};
+    const data = await fs.readFile(filePath, 'utf8');
+    const rows = data.trim().split('\n');
 
     if (rows.length <= 1) {
-      return fields;
+      return {};
     }
 
-    rows.forEach((row) => {
-      const columns = row.split(',');
-      const [firstname, , , field] = columns;
-      if (firstname && field) {
+    const fields = {};
+    rows.shift();
+
+    for (const row of rows) {
+      const trimmedRow = row.trim();
+
+      if (trimmedRow !== '') {
+        const [firstName, , , field] = trimmedRow.split(',');
+
         if (!fields[field]) {
           fields[field] = [];
         }
+        fields[field].push(firstName);
       }
-      fields[field].push(firstname);
-    }); 
+    }
 
     return fields;
-  } catch (err) {
+  } catch (error) {
     throw new Error('Cannot load the database');
   }
 }
