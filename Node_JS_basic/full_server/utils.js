@@ -3,34 +3,29 @@ import fs from 'fs/promises';
 export default async function readDatabase(filePath) {
   try {
     const data = await fs.readFile(filePath, 'utf8');
-    const lines = data.split('\n').filter((line) => line.trim());
+    const rows = data.trim().split('\n');
 
-    if (lines.length === 0) {
+    if (rows.length <= 1) {
       return {};
     }
 
-    const [header, ...entries] = lines;
-    const headers = header.split(',');
+    const fields = {};
+    rows.shift();
 
-    const grouped = {};
+    for (const row of rows) {
+      const trimmedRow = row.trim();
 
-    for (const line of entries) {
-      const values = line.split(',');
-      const student = headers.reduce((obj, key, i) => {
-        obj[key] = values[i];
-        return obj;
-      }, {});
+      if (trimmedRow !== '') {
+        const [firstName, , , field] = trimmedRow.split(',');
 
-      const field = student.field;
-      if (field) {
-        if (!grouped[field]) {
-          grouped[field] = [];
+        if (!fields[field]) {
+          fields[field] = [];
         }
-        grouped[field].push(student.firstname);
+        fields[field].push(firstName);
       }
     }
 
-    return grouped;
+    return fields;
   } catch (error) {
     throw new Error('Cannot load the database');
   }
