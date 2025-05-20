@@ -30,11 +30,12 @@ class StudentsController {
 
     try {
       const data = await readDatabase(request.app.get('database'));
-      if (Object.keys(data).length === 0 || !data[major]) {
-        return response.status(200).send(`No students for ${major}`);
+      const students = data[major]
+      if (!students) {
+        return res.status(500).send('Cannot load the database');
       }
 
-      return response.status(200).send(`List: ${data[major].join(', ')}`);
+      return response.status(200).send(`List: ${students.join(', ')}`);
     } catch (error) {
       response.status(500).send(error.message);
     }
