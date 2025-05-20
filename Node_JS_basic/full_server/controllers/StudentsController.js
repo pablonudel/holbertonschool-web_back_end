@@ -4,10 +4,12 @@ class StudentsController {
   static async getAllStudents(request, response) {
     try {
       const data = await readDatabase(request.app.get('database'));
-      let output = 'This is the list of our students';    
+      let output = 'This is the list of our students';
 
-      for (const field in data) {
-        const students = data[field];
+      const sortedFields = Object.keys(data).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+      
+      for (const field of sortedFields) {
+        const students = data[field];  
         output += `\nNumber of students in ${field}: ${students.length}. List: ${students.join(', ')}`;
       }
 
@@ -20,7 +22,7 @@ class StudentsController {
   static async getAllStudentsByMajor(request, response) {
     const { major } = request.params;
 
-    if (major !== 'CS' || major !== 'SWE') {
+    if (!['CS', 'SWE'].includes(major)) {
       return response.status(500).send('Major parameter must be CS or SWE');
     }
 
