@@ -4,8 +4,8 @@ import routes from './routes/index';
 const app = express();
 const port = 1245;
 
-const database = process.argv.length > 2 ? process.argv[2] : '';
-app.set('database', database);
+// const database = process.argv.length > 2 ? process.argv[2] : '';
+// app.set('database', database);
 
 app.use('/', routes);
 
