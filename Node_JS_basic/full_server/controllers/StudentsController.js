@@ -1,14 +1,12 @@
 import readDatabase from '../utils';
 
-const database = process.argv[2];
-
 export default class StudentsController {
   static async getAllStudents(req, res) {
     try {
-      const data = await readDatabase(database);
+      const data = await readDatabase(req.app.get('database'));
       let output = 'This is the list of our students';
 
-      const sortedFields = Object.keys(data).sort();
+      const sortedFields = Object.keys(data).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
 
       for (const field of sortedFields) {
         const students = data[field];
@@ -29,7 +27,7 @@ export default class StudentsController {
     }
 
     try {
-      const data = await readDatabase(database);
+      const data = await readDatabase(req.app.get('database'));
       const students = data[major];
       if (!students) {
         return res.status(500).send('Cannot load the database');
